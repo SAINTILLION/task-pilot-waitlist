@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F2F1F8" />
+  <meta name="description"
+    content="TaskPilot is your AI daily companion. Capture tasks, organise your day and stay on track. Join the early-access waitlist." />
+  <title>TaskPilot — Your AI daily companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="nav container">
+    <a class="brand" href="#top" aria-label="TaskPilot home"><span
+        class="brand-mark"><span></span></span><span>TaskPilot</span></a>
+    <a href="#waitlist" class="nav-cta">Get early access <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="pulse"></span> YOUR AI DAILY COMPANION</div>
+        <h1>Your day.<br /><span>Less effort.</span><br />More intention.</h1>
+        <p class="hero-description">Your schedule shouldn't feel like another task on your to-do list. Meet an AI
+          companion that helps you capture, plan and follow through — simply by talking.</p>
+        <form class="waitlist-form hero-form" id="waitlist-form">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="Enter your email address"
+            maxlength="254" required />
+          <button id="submit-btn" type="submit">Join the waitlist <span>→</span></button>
+        </form>
+        <p class="form-note" id="form-note">Be among the first to try TaskPilot. No spam, ever.</p>
+        <div class="proof">
+          <div class="avatars"><span>T</span><span>P</span><span>A</span></div><span>Join the early-access list</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-label="Illustration of a holographic AI orb and daily schedule">
+        <div class="orbit orbit-a"></div>
+        <div class="orbit orbit-b"></div>
+        <div class="orb">
+          <div class="orb-core"></div>
+          <div class="orb-shine"></div>
+        </div>
+        <div class="float-card task-card">
+          <div class="mini-icon check-icon">✓</div>
+          <div><small>TASK COMPLETED</small><strong>Morning workout</strong></div><span class="card-time">7:00 AM</span>
+        </div>
+        <div class="float-card reminder-card">
+          <div class="mini-icon bell-icon">◔</div>
+          <div><small>UP NEXT</small><strong>Review project</strong><span>10 minutes from now</span></div>
+        </div>
+        <div class="float-card voice-card">
+          <div class="voice-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><small>VOICE CAPTURE</small><strong>“Plan my day”</strong></div>
+        </div>
+        <div class="visual-label"><span class="sparkle">✦</span> A little intelligence for every day</div>
+      </div>
+    </section>
+
+    <section class="features container reveal">
+      <div class="section-heading">
+        <div class="eyebrow">A BETTER WAY TO GET THINGS DONE</div>
+        <h2>Planning should be easy.<br /><span>Following through, easier.</span></h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon mic">⌁</div>
+          <h3>Just say it.</h3>
+          <p>Capture tasks, ideas and reminders in your own words. Spend less time typing and more time moving.</p>
+          <div class="feature-art voice-art"><span>“Remind me to call Mum.”</span>
+            <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon calendar">▦</div>
+          <h3>Find your rhythm.</h3>
+          <p>Bring your tasks, plans and goals together so your day has direction, not just a list.</p>
+          <div class="feature-art calendar-art">
+            <div class="cal-top">YOUR DAY <span>↗</span></div>
+            <div class="cal-row"><b>08:00</b><span class="cal-pill purple">Deep work</span></div>
+            <div class="cal-row"><b>11:30</b><span class="cal-pill blue">Break</span></div>
+            <div class="cal-row"><b>14:00</b><span class="cal-pill pink">Project</span></div>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon focus">✧</div>
+          <h3>Stay in motion.</h3>
+          <p>Helpful reminders and progress check-ins keep your priorities close and your momentum going.</p>
+          <div class="feature-art progress-art">
+            <div class="progress-ring"><span>72%<small>THIS WEEK</small></span></div>
+            <div class="progress-lines"><b>Weekly goals</b><span></span><span></span><span></span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing container reveal" id="waitlist">
+      <div class="closing-orb">
+        <div class="small-orb"></div>
+      </div>
+      <div class="closing-content">
+        <div class="eyebrow">THE NEXT STEP STARTS HERE</div>
+        <h2>Make room<br /><span>for doing.</span></h2>
+        <p>Get early access to TaskPilot and discover a calmer way to organise your everyday.</p>
+        <form class="waitlist-form closing-form" id="waitlist-form-bottom"><label class="sr-only"
+            for="email-bottom">Email address</label><input id="email-bottom" name="email" type="email"
+            autocomplete="email" placeholder="Your email address" maxlength="254" required /><button
+            id="submit-btn-bottom" type="submit">Join the waitlist <span>→</span></button></form>
+        <p class="form-note" id="form-note-bottom">Early access updates, only when they matter.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container"><a class="brand footer-brand" href="#top"><span
+        class="brand-mark"><span></span></span><span>TaskPilot</span></a>
+    <p>Less friction. More intention.</p><span class="copyright">© <span id="year"></span> TaskPilot</span>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
