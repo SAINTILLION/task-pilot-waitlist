@@ -1,38 +1,44 @@
-# TaskPilot Waitlist Website
+# TaskPilot Waitlist — Duplicate Registration Update
 
-A responsive, animated single-page waitlist site with Firebase Firestore signup integration.
+This update adds an individual Firestore document lookup before creating a waitlist registration.
 
 ## Files
-- `index.html`: page markup
-- `styles.css`: responsive styling and animations
-- `app.js`: Firestore signup logic
-- `firebase-config.js`: Firebase Web app configuration placeholders
-- `firestore.rules`: restrictive rules for the waitlist collection
+
+- `app.js`: replace the existing website `app.js` with this file.
+- `firestore.rules`: publish these rules in Firebase Console → Firestore Database → Rules.
+
+Keep your existing `index.html`, `styles.css`, and `firebase-config.js` unchanged.
+
+## Firestore document structure
+
+Collection: `waitlist`
+
+Document ID: normalized email address (lowercase and trimmed)
+
+Fields:
+
+- `email` (string)
+- `country` (string; best-effort browser locale)
+- `countryCode` (string; best-effort browser locale)
+- `timezone` (string; browser-configured IANA timezone)
+- `source` (string: `taskpilot-website`)
+- `createdAt` (Firestore server timestamp)
 
 ## Setup
-1. Create or open your Firebase project at https://console.firebase.google.com/.
-2. Add a **Web app** to the project (project overview > Add app > Web).
-3. Copy the Firebase configuration snippet/config object.
-4. Replace the placeholder values in `firebase-config.js` with your actual values.
-5. In Firebase Console, open **Firestore Database** and create a database.
-6. Open Firestore **Rules**, paste the contents of `firestore.rules`, and publish the rules.
-7. Run the site from a local web server (ES modules won't work reliably from `file://`). For example, in this folder run `python -m http.server 8000`, then visit http://localhost:8000.
-8. Deploy the folder to Firebase Hosting, Netlify, Cloudflare Pages, or another static host.
 
-## Deploy to Firebase Hosting (optional)
-Install Firebase CLI, log in, then from this folder:
+1. Back up your current `app.js` and Firestore rules.
+2. Replace the website's `app.js` with the supplied file.
+3. Open Firebase Console → Firestore Database → Rules.
+4. Replace the rules with the supplied `firestore.rules` and click Publish.
+5. Refresh the website and test with a new email address.
+6. Test the same email again. It should display the already-registered message.
 
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-# Select your existing Firebase project; set public directory to this folder (or use a clean deploy folder).
-# If asked about single-page app rewrites, answer No.
-firebase deploy --only hosting
-```
+## Important privacy and security note
 
-## Notes
-- This is a public signup form. The client config is not a secret.
-- Rules prohibit client reads and updates/deletes, and validate fields on signup.
-- For stronger abuse protection, configure Firebase App Check with reCAPTCHA for your web app and enforce it for Firestore after testing.
-- Avoid collecting unnecessary personal data. The form collects email only.
+These rules allow `get` on an individual waitlist document but deny `list`. Because document IDs are email addresses, a visitor who knows or guesses an email can check whether it is registered. The full collection cannot be listed through these rules, but individual membership can be tested. For a production waitlist, consider moving duplicate checks and registration writes behind a trusted backend (for example, a Firebase Cloud Function) and adding App Check/rate limiting.
+
+The rules permit creation only and prohibit public updates and deletes. The `createdAt` field must be written using Firebase `serverTimestamp()`.
+
+## Local testing
+
+Live Server is supported. Open the site using its local HTTP address, submit a new email, and inspect Firestore → Data → `waitlist`. Browser locale country detection is approximate; timezone is read from the browser configuration.

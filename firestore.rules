@@ -1,23 +1,48 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /waitlist/{emailDoc} {
-      allow create: if emailDoc == request.resource.data.email
-        && request.resource.data.keys().hasOnly(['email', 'source', 'country', 'countryCode', 'timezone', 'createdAt'])
-        && request.resource.data.keys().hasAll(['email', 'source', 'country', 'countryCode', 'timezone', 'createdAt'])
+    match /waitlist/{emailId} {
+      // Allow a client to check ONE known email/document ID.
+      // This does not permit listing or downloading the collection.
+      // Note: it does reveal whether a guessed email is registered.
+      allow get: if true;
+      allow list: if false;
+
+      // Allow creation only, with the exact expected fields and values.
+      // Existing documents cannot be overwritten by public clients.
+      allow create: if
+        emailId == request.resource.data.email
+        && request.resource.data.keys().hasAll([
+          'email',
+          'country',
+          'countryCode',
+          'timezone',
+          'source',
+          'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'email',
+          'country',
+          'countryCode',
+          'timezone',
+          'source',
+          'createdAt'
+        ])
         && request.resource.data.email is string
+        && request.resource.data.email.size() > 3
         && request.resource.data.email.size() <= 254
-        && request.resource.data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
-        && request.resource.data.source == 'taskpilot-website'
         && request.resource.data.country is string
         && request.resource.data.country.size() <= 100
         && request.resource.data.countryCode is string
         && request.resource.data.countryCode.size() <= 10
         && request.resource.data.timezone is string
         && request.resource.data.timezone.size() <= 100
+        && request.resource.data.source == 'taskpilot-website'
         && request.resource.data.createdAt == request.time;
-      allow read, update, delete: if false;
+
+      // Public clients cannot modify or remove registrations.
+      allow update, delete: if false;
     }
-    match /{document=**} { allow read, write: if false; }
   }
 }
